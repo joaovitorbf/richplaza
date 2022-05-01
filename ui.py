@@ -17,6 +17,7 @@ class UserInterface:
         self.root.resizable(False, False)
         self.playing = player.is_playing()
         self.end = 0
+        self.player = player
 
         self.presence = pypresence.Presence("970102086194827294")
         self.presence.connect()
@@ -154,3 +155,6 @@ class UserInterface:
         self.time_text.set("{}:{} / {}:{}".format(timepos[1], timepos[2], timelen[1], timelen[2]))
     def set_reactions(self, reactions):
         self.like_btn_text.set("♥ {}".format(reactions))
+    def is_playing(self):
+        self.playing = self.player.is_playing()
+        return self.playing

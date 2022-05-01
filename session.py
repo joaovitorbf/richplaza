@@ -33,7 +33,8 @@ class Session:
         self.position = info['song']['position']
         self.initialtime = int(time())-info['song']['position']
 
-        if self.ui.playing:
+        if self.ui.is_playing():
+            print("update")
             self.ui.presence.update(state="by {}".format(info['song']['artist']),
                 details=info['song']['title'],
                 end=self.initialtime+self.length,
