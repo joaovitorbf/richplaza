@@ -25,7 +25,7 @@ class UserInterface:
         WCELLS = 24
         HCELLS = 3
 
-        def nothing(): messagebox.showinfo(title="Oops!", message="There's still nothing here! Sorry!")
+        def nothing(): messagebox.showinfo(title="Oops!", message="This button is still a WIP!")
 
         # Style definitions
         style = ttk.Style(self.root)
@@ -43,14 +43,14 @@ class UserInterface:
         # Toolbar buttons
         about_btn = ttk.Button(mainframe, text="About", padding="3 2 3 2", style="ToolBar.TButton", command=nothing)
         about_btn.grid(column=1, row=1, sticky="ew")
-        history_btn = ttk.Button(mainframe, text="Play History", padding="3 2 3 2", style="ToolBar.TButton", command=nothing)
-        history_btn.grid(column=2, row=1, sticky="ew")
-        ratings_btn = ttk.Button(mainframe, text="Ratings", padding="3 2 3 2", style="ToolBar.TButton", command=nothing)
-        ratings_btn.grid(column=3, row=1, sticky="ew")
-        donate_btn = ttk.Button(mainframe, text="Donate", padding="3 2 3 2", style="ToolBar.TButton", command=nothing)
-        donate_btn.grid(column=4, row=1, sticky="ew")
-        account_btn = ttk.Button(mainframe, text="Sign In", padding="3 2 3 2", style="ToolBar.TButton", command=nothing)
-        account_btn.grid(column=WCELLS, row=1, sticky="nsew")
+        #history_btn = ttk.Button(mainframe, text="Play History", padding="3 2 3 2", style="ToolBar.TButton", command=nothing)
+        #history_btn.grid(column=2, row=1, sticky="ew")
+        #ratings_btn = ttk.Button(mainframe, text="Ratings", padding="3 2 3 2", style="ToolBar.TButton", command=nothing)
+        #ratings_btn.grid(column=3, row=1, sticky="ew")
+        #donate_btn = ttk.Button(mainframe, text="Donate", padding="3 2 3 2", style="ToolBar.TButton", command=nothing)
+        #donate_btn.grid(column=4, row=1, sticky="ew")
+        #account_btn = ttk.Button(mainframe, text="Sign In", padding="3 2 3 2", style="ToolBar.TButton", command=nothing)
+        #account_btn.grid(column=WCELLS, row=1, sticky="nsew")
 
         # Central player frame
         player_frame = ttk.Frame(mainframe, padding=10, width=466, height=130, border=1, relief=SUNKEN)
