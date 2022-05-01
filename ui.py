@@ -1,4 +1,5 @@
 import datetime
+from sys import maxsize
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
@@ -69,9 +70,9 @@ class UserInterface:
                              columnspan=WCELLS, sticky="sew")
         self.listeners_text = StringVar()
         self.listeners_text.set("Listeners:")
-        self.listeners_frame = ttk.Label(
+        self.listeners_label = ttk.Label(
             listeners_frame, textvariable=self.listeners_text, font=('Verdana', '8'))
-        self.listeners_frame.grid(column=1, row=1, sticky="w")
+        self.listeners_label.grid(column=1, row=1, sticky="w")
 
         # Album cover
         cover_frame = ttk.Frame(player_frame, padding=0,
@@ -89,12 +90,12 @@ class UserInterface:
 
         self.artist_text = StringVar()
         self.artist_label = ttk.Label(
-            detandcont_frame, textvariable=self.artist_text, font=('Verdana', '11', 'bold'))
+            detandcont_frame, textvariable=self.artist_text, font=('Verdana', '11', 'bold'), width=25)
         self.artist_label.grid(column=1, row=1, columnspan=2, sticky="w")
 
         self.track_text = StringVar()
         self.track_label = ttk.Label(
-            detandcont_frame, textvariable=self.track_text, font=('Verdana', '11'))
+            detandcont_frame, textvariable=self.track_text, font=('Verdana', '11'), width=30)
         self.track_label.grid(column=1, row=2, columnspan=2, sticky="w")
 
         time_frame = ttk.Frame(detandcont_frame, padding=0,
