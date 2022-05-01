@@ -6,15 +6,18 @@ from tkinter.font import Font
 from math import floor
 import datetime
 import pypresence
+from os import path
 
 
 class UserInterface:
     def __init__(self, player) -> None:
+        self.bundle_dir = path.abspath(path.dirname(__file__))
+
         # Init Tk
         self.root = Tk()
         self.root.title("Rich Plaza")
         self.root.geometry("470x180")
-        self.root.iconbitmap("favicon.ico")
+        self.root.iconbitmap(path.join(self.bundle_dir, 'favicon.ico'))
         self.root.resizable(False, False)
         self.playing = player.is_playing()
         self.end = 0
@@ -116,7 +119,7 @@ class UserInterface:
         volume_scale.grid(column=2, row=3)
         detandcont_frame.columnconfigure(2, pad=15)
 
-        self.volume_image = PhotoImage(file="volume.png")
+        self.volume_image = PhotoImage(file=path.join(self.bundle_dir, 'volume.png'))
         volume_img_label = ttk.Label(detandcont_frame, image=self.volume_image)
         volume_img_label.grid(column=3, row=3)
 

@@ -1,0 +1,1 @@
+pyinstaller --onefile --icon="favicon.ico" --noconsole --add-data "favicon.ico;." --add-data "volume.png;." .\main.py
