@@ -32,12 +32,18 @@ class Session:
         self.length = info['song']['length']
         self.position = info['song']['position']
         self.initialtime = int(time())-info['song']['position']
+
+        if self.ui.playing:
+            self.ui.presence.update(state="by {}".format(info['song']['artist']),
+                details=info['song']['title'],
+                end=self.initialtime+self.length,
+                large_image='nightwave')
+
         self.update_time()
 
     def update_time(self):
         if not main_thread().is_alive(): return
-        self.ui.set_time(self.length, int(time())-self.initialtime)
-        print(int(time())-self.initialtime)
+        self.ui.set_time(self.length, int(time())-self.initialtime, self.initialtime+self.length)
 
         if int(time())-self.initialtime < self.length:
             Timer(0.5, self.update_time).start()

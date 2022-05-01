@@ -1,8 +1,11 @@
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox
+import tkinter
 from tkinter.font import Font
 from math import floor
 import datetime
+import pypresence
 
 class UserInterface:
     def __init__(self, player) -> None:
@@ -10,10 +13,18 @@ class UserInterface:
         self.root = Tk()
         self.root.title("Rich Plaza")
         self.root.geometry("470x180")
+        self.root.iconbitmap("favicon.ico")
         self.root.resizable(False, False)
+        self.playing = player.is_playing()
+        self.end = 0
+
+        self.presence = pypresence.Presence("970102086194827294")
+        self.presence.connect()
 
         WCELLS = 24
         HCELLS = 3
+
+        def nothing(): messagebox.showinfo(title="Oops!", message="There's still nothing here! Sorry!")
 
         # Style definitions
         style = ttk.Style(self.root)
@@ -29,15 +40,15 @@ class UserInterface:
         self.root.rowconfigure(0, weight=1)
 
         # Toolbar buttons
-        about_btn = ttk.Button(mainframe, text="About", padding="3 2 3 2", style="ToolBar.TButton")
+        about_btn = ttk.Button(mainframe, text="About", padding="3 2 3 2", style="ToolBar.TButton", command=nothing)
         about_btn.grid(column=1, row=1, sticky="ew")
-        history_btn = ttk.Button(mainframe, text="Play History", padding="3 2 3 2", style="ToolBar.TButton")
+        history_btn = ttk.Button(mainframe, text="Play History", padding="3 2 3 2", style="ToolBar.TButton", command=nothing)
         history_btn.grid(column=2, row=1, sticky="ew")
-        ratings_btn = ttk.Button(mainframe, text="Ratings", padding="3 2 3 2", style="ToolBar.TButton")
+        ratings_btn = ttk.Button(mainframe, text="Ratings", padding="3 2 3 2", style="ToolBar.TButton", command=nothing)
         ratings_btn.grid(column=3, row=1, sticky="ew")
-        donate_btn = ttk.Button(mainframe, text="Donate", padding="3 2 3 2", style="ToolBar.TButton")
+        donate_btn = ttk.Button(mainframe, text="Donate", padding="3 2 3 2", style="ToolBar.TButton", command=nothing)
         donate_btn.grid(column=4, row=1, sticky="ew")
-        account_btn = ttk.Button(mainframe, text="Sign In", padding="3 2 3 2", style="ToolBar.TButton")
+        account_btn = ttk.Button(mainframe, text="Sign In", padding="3 2 3 2", style="ToolBar.TButton", command=nothing)
         account_btn.grid(column=WCELLS, row=1, sticky="nsew")
 
         # Central player frame
@@ -100,12 +111,17 @@ class UserInterface:
         ctrlbtns_frame.columnconfigure(3,minsize=111)
 
         def play():
-            playing = player.is_playing()
-            if playing:
+            self.playing = player.is_playing()
+            if self.playing:
+                self.presence.clear()
                 self.playbtn_text.set("Play")
                 player.stop()
             else:
                 self.playbtn_text.set("Stop")
+                self.presence.update(state="by {}".format(self.artist_text.get()),
+                    details=self.track_text.get(),
+                    end=self.end,
+                    large_image='nightwave')
                 player.play()
 
         self.playbtn_text = StringVar()
@@ -115,10 +131,10 @@ class UserInterface:
 
         self.like_btn_text = StringVar()
         self.like_btn_text.set("♥ 0")
-        like_btn = ttk.Button(ctrlbtns_frame, textvariable=self.like_btn_text, padding="3 2 3 2", width=4)
+        like_btn = ttk.Button(ctrlbtns_frame, textvariable=self.like_btn_text, padding="3 2 3 2", width=4, command=nothing)
         like_btn.grid(column=2, row=1, sticky="we", padx=6)
 
-        settings_btn = ttk.Button(ctrlbtns_frame, text="Settings", padding="3 2 3 2")
+        settings_btn = ttk.Button(ctrlbtns_frame, text="Settings", padding="3 2 3 2", command=nothing)
         settings_btn.grid(column=3, row=1, sticky="we")
 
     def mainloop(self):
@@ -131,7 +147,8 @@ class UserInterface:
     def set_album_cover(self, img):
         self.cover_label.configure(image=img)
         self.cover_label.image = img
-    def set_time(self, length, position):
+    def set_time(self, length, position, end):
+        self.end = end
         timelen = str(datetime.timedelta(seconds=length)).split(':')
         timepos = str(datetime.timedelta(seconds=position)).split(':')
         self.time_text.set("{}:{} / {}:{}".format(timepos[1], timepos[2], timelen[1], timelen[2]))
