@@ -2,7 +2,7 @@ import requests
 import urllib
 from PIL import ImageTk, Image
 from io import BytesIO
-from threading import Timer, main_thread
+from threading import Timer, main_thread, Thread
 from time import sleep, time
 
 class Session:
@@ -12,7 +12,8 @@ class Session:
         self.length = 1
         self.initialtime = time()
 
-        self.update_interface()
+        Thread(target=self.update_interface, daemon=True).run()
+        Thread(target=self.update_listeners, daemon=True).run()
 
     def get_status(self):
         r = self.req.get("https://api.plaza.one/status")
@@ -47,5 +48,15 @@ class Session:
         self.ui.set_time(self.length, int(time())-self.initialtime, self.initialtime+self.length)
 
         if int(time())-self.initialtime < self.length:
-            Timer(0.5, self.update_time).start()
+            timer = Timer(0.5, self.update_time)
+            timer.daemon = True
+            timer.start()
         else: self.update_interface()
+
+    def update_listeners(self):
+        if not main_thread().is_alive(): return
+        r = self.req.get("https://api.plaza.one/status/on-screen-data")
+        self.ui.set_listeners(r.json()[1])
+        timer = Timer(10, self.update_listeners)
+        timer.daemon = True
+        timer.start()
