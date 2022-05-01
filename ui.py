@@ -7,6 +7,8 @@ from math import floor
 import datetime
 import pypresence
 from os import path
+from threading import Thread, Timer
+from time import sleep
 
 
 class UserInterface:
@@ -22,9 +24,15 @@ class UserInterface:
         self.playing = player.is_playing()
         self.end = 0
         self.player = player
+        self.shouldbeplaying = False
 
-        self.presence = pypresence.Presence("970102086194827294")
-        self.presence.connect()
+        try:
+            self.presence = pypresence.Presence("970102086194827294")
+            self.presence.connect()
+        except:
+            messagebox.showerror(
+                title="Error!", message="Could not connect to Discord.")
+            quit()
 
         WCELLS = 24
         HCELLS = 3
@@ -119,7 +127,8 @@ class UserInterface:
         volume_scale.grid(column=2, row=3)
         detandcont_frame.columnconfigure(2, pad=15)
 
-        self.volume_image = PhotoImage(file=path.join(self.bundle_dir, 'volume.png'))
+        self.volume_image = PhotoImage(
+            file=path.join(self.bundle_dir, 'volume.png'))
         volume_img_label = ttk.Label(detandcont_frame, image=self.volume_image)
         volume_img_label.grid(column=3, row=3)
 
@@ -138,6 +147,7 @@ class UserInterface:
                 self.presence.clear()
                 self.playbtn_text.set("Play")
                 player.stop()
+                self.shouldbeplaying = False
             else:
                 self.playbtn_text.set("Stop")
                 self.presence.update(state="by {}".format(self.artist_text.get()),
@@ -145,6 +155,7 @@ class UserInterface:
                                      end=self.end,
                                      large_image='nightwave')
                 player.play()
+                self.shouldbeplaying = True
 
         self.playbtn_text = StringVar()
         self.playbtn_text.set("Play")

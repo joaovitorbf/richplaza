@@ -1,14 +1,9 @@
 from ui import UserInterface
 from session import Session
-import vlc
+from player import Player
 
-vlcinstance = vlc.Instance()
-player=vlcinstance.media_player_new()
-media=vlcinstance.media_new("http://radio.plaza.one/mp3")
-player.set_media(media)
-player.audio_set_volume(100)
-
+player = Player()
 ui = UserInterface(player)
-session = Session(ui)
+session = Session(ui, player)
 
 ui.mainloop()
