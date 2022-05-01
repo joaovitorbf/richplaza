@@ -1,9 +1,8 @@
 import requests
-import urllib
 from PIL import ImageTk, Image
 from io import BytesIO
 from threading import Timer, main_thread, Thread
-from time import sleep, time
+from time import time
 
 
 class Session:

@@ -1,6 +1,6 @@
 import pypresence
 from tkinter import messagebox
-from multiprocessing import Process, shared_memory, Queue
+from multiprocessing import Process, Queue
 from time import sleep
 
 

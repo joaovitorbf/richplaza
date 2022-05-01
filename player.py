@@ -1,6 +1,5 @@
 import vlc
 
-
 class Player:
     def __init__(self) -> None:
         self.volume = 100

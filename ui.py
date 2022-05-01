@@ -1,14 +1,8 @@
+import datetime
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
-import tkinter
-from tkinter.font import Font
-from math import floor
-import datetime
-import pypresence
 from os import path
-from threading import Thread, Timer
-from time import sleep
 
 
 class UserInterface:
