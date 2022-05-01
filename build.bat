@@ -1,1 +1,1 @@
-pyinstaller --onefile --icon="favicon.ico" --noconsole --add-data "favicon.ico;." --add-data "volume.png;." .\main.py
+nuitka --onefile --windows-disable-console --enable-plugin=tk-inter --include-data-file=favicon.ico=favicon.ico --include-data-file=volume.png=volume.png --follow-imports main.py
