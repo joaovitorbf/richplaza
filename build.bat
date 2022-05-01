@@ -1,1 +1,1 @@
-nuitka --onefile --windows-disable-console --windows-icon-from-ico=favicon.ico --enable-plugin=tk-inter --include-data-file=favicon.ico=favicon.ico --include-data-file=volume.png=volume.png --follow-imports main.py
+cxfreeze -OO -c main.py --target-dir dist --target-name "Rich Plaza" --base-name "Win32GUI" --icon "resources/favicon.ico" --include-files=resources/
