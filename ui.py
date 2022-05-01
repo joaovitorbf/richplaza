@@ -12,11 +12,13 @@ from time import sleep
 
 
 class UserInterface:
-    def __init__(self, player) -> None:
+    def __init__(self, player, presence) -> None:
         self.bundle_dir = path.abspath(path.dirname(__file__))
 
         # Init Tk
         self.root = Tk()
+        self.root.withdraw()
+        self.root.eval('tk::PlaceWindow . center')
         self.root.title("Rich Plaza")
         self.root.geometry("470x180")
         self.root.iconbitmap(path.join(self.bundle_dir, 'favicon.ico'))
@@ -25,14 +27,6 @@ class UserInterface:
         self.end = 0
         self.player = player
         self.shouldbeplaying = False
-
-        try:
-            self.presence = pypresence.Presence("970102086194827294")
-            self.presence.connect()
-        except:
-            messagebox.showerror(
-                title="Error!", message="Could not connect to Discord.")
-            quit()
 
         WCELLS = 24
         HCELLS = 3
@@ -144,16 +138,15 @@ class UserInterface:
         def play():
             self.playing = player.is_playing()
             if self.playing:
-                self.presence.clear()
+                presence.clear()
                 self.playbtn_text.set("Play")
                 player.stop()
                 self.shouldbeplaying = False
             else:
                 self.playbtn_text.set("Stop")
-                self.presence.update(state="by {}".format(self.artist_text.get()),
-                                     details=self.track_text.get(),
-                                     end=self.end,
-                                     large_image='nightwave')
+                presence.update(self.artist_text.get(),
+                                self.track_text.get(),
+                                self.end)
                 player.play()
                 self.shouldbeplaying = True
 
@@ -174,6 +167,7 @@ class UserInterface:
         settings_btn.grid(column=3, row=1, sticky="we")
 
     def mainloop(self):
+        self.root.deiconify()
         self.root.mainloop()
 
     def set_track_name(self, name):

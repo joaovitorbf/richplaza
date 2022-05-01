@@ -1,5 +1,6 @@
 import vlc
 
+
 class Player:
     def __init__(self) -> None:
         self.configure()
@@ -9,13 +10,13 @@ class Player:
             self.player.stop()
             self.vlcinstance.release()
             self.player.release()
-        except: pass
-        self.vlcinstance = vlc.Instance()
+        except:
+            self.vlcinstance = vlc.Instance()
         self.player = self.vlcinstance.media_player_new()
         self.media = self.vlcinstance.media_new("http://radio.plaza.one/mp3")
         self.player.set_media(self.media)
         self.player.audio_set_volume(100)
-    
+
     def play(self):
         self.player.play()
 

@@ -7,7 +7,7 @@ from time import sleep, time
 
 
 class Session:
-    def __init__(self, ui, player):
+    def __init__(self, ui, player, presence):
         self.req = requests.session()
         self.ui = ui
         self.length = 1
@@ -15,6 +15,7 @@ class Session:
         self.lastupdate = 0
         self.player = player
         self.playercheck = False
+        self.presence = presence
 
         Thread(target=self.update_interface, daemon=True).run()
         Thread(target=self.update_listeners, daemon=True).run()
@@ -33,7 +34,8 @@ class Session:
             return
 
         self.lastupdate = time()
-        if not self.playercheck: self.check_player()
+        if not self.playercheck:
+            self.check_player()
 
         try:
             info = self.get_status()
@@ -59,19 +61,18 @@ class Session:
 
         if self.ui.is_playing():
             print("update")
-            self.ui.presence.update(state="by {}".format(info['song']['artist']),
-                                    details=info['song']['title'],
-                                    end=self.initialtime+self.length,
-                                    large_image='nightwave')
+            self.presence.update(info['song']['artist'],
+                                 info['song']['title'],
+                                 self.initialtime+self.length,)
 
         self.update_time()
 
     def update_time(self):
-        print("update_time")
         if not main_thread().is_alive():
             return
 
-        if not self.playercheck: self.check_player()
+        if not self.playercheck:
+            self.check_player()
 
         self.ui.set_time(self.length, int(time()) -
                          self.initialtime, self.initialtime+self.length)
@@ -88,7 +89,8 @@ class Session:
         if not main_thread().is_alive():
             return
 
-        if not self.playercheck: self.check_player()
+        if not self.playercheck:
+            self.check_player()
 
         try:
             r = self.req.get("https://api.plaza.one/status/on-screen-data")
