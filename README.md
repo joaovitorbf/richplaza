@@ -6,7 +6,7 @@
 ---
 
 A [Nightwave Plaza](https://plaza.one/) desktop client with Discord Rich Presence! Stream music directly to your computer and show it to your Discord friends!  
-This software is still under development and may be kinda unstable.
+This software is still under development and may be kinda unstable and buggy.
 
 ## Screenshots
 ![image](https://user-images.githubusercontent.com/2998216/166132206-f811201f-d475-409a-b7b0-83fbc5640be2.png) ![image](https://user-images.githubusercontent.com/2998216/166127562-de349af9-333a-48d3-be03-69e1b74aa7bf.png)
