@@ -20,15 +20,10 @@ class Presence:
             sleep(1)
 
     def configure(self):
-        try:
-            print("start presence")
-            self.presence = pypresence.Presence("970102086194827294")
-            self.presence.connect()
-            print("presence connected")
-        except:
-            messagebox.showerror(
-                title="Error!", message="Could not connect to Discord.")
-            quit()
+        print("start presence")
+        self.presence = pypresence.Presence("970102086194827294")
+        self.presence.connect()
+        print("presence connected")
 
     def apply_update(self, artist, track, end):
         self.presence.update(state="by {}".format(artist),
