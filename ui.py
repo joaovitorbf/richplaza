@@ -8,15 +8,13 @@ from os import path
 
 class UserInterface:
     def __init__(self, player, presence) -> None:
-        self.bundle_dir = path.abspath(path.dirname(__file__))
-
         # Init Tk
         self.root = Tk()
         self.root.withdraw()
         self.root.eval('tk::PlaceWindow . center')
         self.root.title("Rich Plaza")
         self.root.geometry("470x180")
-        self.root.iconbitmap(path.join(self.bundle_dir, 'favicon.ico'))
+        self.root.iconbitmap('resources/favicon.ico')
         self.root.resizable(False, False)
         self.playing = player.is_playing()
         self.end = 0
@@ -117,7 +115,7 @@ class UserInterface:
         detandcont_frame.columnconfigure(2, pad=15)
 
         self.volume_image = PhotoImage(
-            file=path.join(self.bundle_dir, 'volume.png'))
+            file='resources/volume.png')
         volume_img_label = ttk.Label(detandcont_frame, image=self.volume_image)
         volume_img_label.grid(column=3, row=3)
 
