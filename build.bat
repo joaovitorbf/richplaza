@@ -1,1 +1,1 @@
-nuitka --onefile --windows-disable-console --enable-plugin=tk-inter --include-data-file=favicon.ico=favicon.ico --include-data-file=volume.png=volume.png --follow-imports main.py
+nuitka --onefile --windows-disable-console --windows-icon-from-ico=favicon.ico --enable-plugin=tk-inter --include-data-file=favicon.ico=favicon.ico --include-data-file=volume.png=volume.png --follow-imports main.py
