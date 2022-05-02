@@ -154,7 +154,5 @@ cython_debug/
 # Visual Studio Code
 .vscode/
 
-# Nuitka
-main.exe
-main.cmd
-main.*/
+# Inno
+Output/
