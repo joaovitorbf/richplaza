@@ -20,7 +20,7 @@ LicenseFile={#SourcePath}\LICENSE
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=commandline
-OutputBaseFilename=setup
+OutputBaseFilename="Rich Plaza - Setup"
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
