@@ -19,7 +19,7 @@ This software is still under development and may be kinda unstable and buggy.
 
 ## Install
 ### Windows
-This software was made for Windows and was only tested on Windows. If you are using Windows, click [HERE](https://github.com/joaovitorbf/richplaza/releases/latest) to go to the latest release page and download the binary. Just run it anywhere and the player will ~~probably~~ open.  
+This software was made for Windows and was only tested on Windows. If you are using Windows, click [HERE](https://github.com/joaovitorbf/richplaza/releases/latest) to go to the latest release page and download the files. You can either download the setup or the portable zip. The setup will install the program on your machine while the portable zip doesn't need to be installed, just extract it anywhere and run the executable.  
 **Windows SmartScreen may block the execution of the client. Just click 'More Info' and 'Run Anyway'.**
 
 ### Other
