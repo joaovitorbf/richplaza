@@ -1,3 +1,5 @@
+# Project archived
+This project has been archived, as I don't have enough time right now to continue developing this. Might unarchive it some time. Feel free to fork.
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/2998216/166127422-e1c41e1e-8313-461d-9558-3bbc93517c25.png" width="400"/>
